@@ -1,0 +1,11 @@
+.row {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.row:focus {
+  outline: none;
+  box-shadow: none;
+}

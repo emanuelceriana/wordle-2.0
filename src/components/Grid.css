@@ -1,0 +1,8 @@
+.grid {
+  margin-bottom: 3em;
+}
+
+.grid:focus {
+  outline: none;
+  box-shadow: none;
+}

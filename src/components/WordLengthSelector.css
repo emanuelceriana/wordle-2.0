@@ -1,0 +1,31 @@
+.wordLengthSelector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2em;
+}
+
+.wordLengthSelector span {
+  line-height: 2em;
+  margin-right: 0.5em;
+}
+
+.wordLengthSelector .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wordLengthSelector .selected {
+  border: 2px solid white;
+}
+
+.wordLengthSelector .button {
+  width: 3em;
+  height: 3em;
+  font-size: 0.7em;
+  margin: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
