@@ -5,6 +5,7 @@ interface ModalProps {
   isOpen: boolean;
   onCloseRequest?: () => void;
   showCloseButton: boolean;
+  title?: string;
   children: ReactNode | ReactNode[];
 }
 
@@ -12,6 +13,7 @@ const Modal = ({
   isOpen,
   onCloseRequest,
   showCloseButton,
+  title,
   children,
 }: ModalProps) => {
   if (!isOpen) {
@@ -21,7 +23,9 @@ const Modal = ({
   return (
     <>
       <div className="modalBackground" />
+
       <div className="modal">
+        <div className="title">{title}</div>
         {showCloseButton && (
           <button className="closeButton" onClick={onCloseRequest}>
             X

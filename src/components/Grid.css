@@ -1,5 +1,7 @@
 .grid {
-  margin-bottom: 3em;
+  margin: 1em 0 2em 0;
+  overflow-y: auto;
+  max-height: 455px;
 }
 
 .grid:focus {

@@ -7,6 +7,7 @@ import cn from "classnames";
 import { GlobalWordArray } from "./Grid";
 import "./Keyboard.css";
 import { useCreateObjectList } from "./hooks/useCreateObjectList";
+import { keyboardButtons } from "./constants";
 
 interface KeyboardProps {
   globalWordArrayValidation: GlobalWordArray;
@@ -17,37 +18,6 @@ export const Keyboard = ({
   globalWordArrayValidation,
   activeRow,
 }: KeyboardProps) => {
-  const keyboardButtons = [
-    "q",
-    "w",
-    "e",
-    "r",
-    "t",
-    "y",
-    "u",
-    "i",
-    "o",
-    "p",
-    "a",
-    "s",
-    "d",
-    "f",
-    "g",
-    "h",
-    "j",
-    "k",
-    "l",
-    "z",
-    "enter",
-    "x",
-    "c",
-    "v",
-    "b",
-    "n",
-    "m",
-    "backspace",
-  ];
-
   const { objectList: keyboardButtonsIds } = useCreateObjectList({
     length: keyboardButtons.length,
   });
