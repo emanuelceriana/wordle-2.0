@@ -4,10 +4,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import cn from "classnames";
-import { GlobalWordArray } from "./Grid";
-import "./Keyboard.css";
-import { useCreateObjectList } from "./hooks/useCreateObjectList";
 import { keyboardButtons } from "./constants";
+import { useCreateObjectList } from "../hooks/useCreateObjectList";
+import { GlobalWordArray } from "./Grid";
+import styles from "./Keyboard.module.scss";
 
 interface KeyboardProps {
   globalWordArrayValidation: GlobalWordArray;
@@ -32,15 +32,24 @@ export const Keyboard = ({
   };
 
   return (
-    <div className="keyboard">
+    <div className={styles.keyboard}>
       {keyboardButtonsIds.map(({ id }, idx) => (
         <div
           key={id}
           className={cn(
-            "keyboardButton",
-            { green: globalWordArrayValidation[keyboardButtons[idx]] === 1 },
-            { yellow: globalWordArrayValidation[keyboardButtons[idx]] === 0 },
-            { black: globalWordArrayValidation[keyboardButtons[idx]] === -1 }
+            styles.keyboardButton,
+            {
+              [styles["keyboardButton__green"]]:
+                globalWordArrayValidation[keyboardButtons[idx]] === 1,
+            },
+            {
+              [styles["keyboardButton__yellow"]]:
+                globalWordArrayValidation[keyboardButtons[idx]] === 0,
+            },
+            {
+              [styles["keyboardButton__black"]]:
+                globalWordArrayValidation[keyboardButtons[idx]] === -1,
+            }
           )}
           onClick={() => handleClick(keyboardButtons[idx])}
         >

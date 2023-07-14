@@ -1,7 +1,7 @@
 import * as cn from "classnames";
 import { useCallback, useEffect, useRef } from "react";
-import "./LetterBlock.css";
-import { ValidationArray } from "./utils";
+import { ValidationArray } from "../utils";
+import styles from "./LetterBlock.module.scss";
 
 interface LetterBlockProps {
   focusable: boolean;
@@ -37,12 +37,12 @@ export const LetterBlock = ({
   return (
     <div
       className={cn(
-        "letterBlock",
-        { disabled: !focusable },
-        { focused: isFocused },
-        { green: inputValidation?.value === 1 },
-        { yellow: inputValidation?.value === 0 },
-        { black: inputValidation?.value === -1 }
+        styles.letterBlock,
+        { [styles.disabled]: !focusable },
+        { [styles.focused]: isFocused },
+        { [styles["letterBlock__green"]]: inputValidation?.value === 1 },
+        { [styles["letterBlock__yellow"]]: inputValidation?.value === 0 },
+        { [styles["letterBlock__black"]]: inputValidation?.value === -1 }
       )}
       tabIndex={-1}
       ref={blockRef}
@@ -50,7 +50,9 @@ export const LetterBlock = ({
       onFocus={handleFocus}
     >
       {inputValidation && (
-        <span className="ocurrences">x{inputValidation?.ocurrences}</span>
+        <span className={styles.ocurrences}>
+          x{inputValidation?.ocurrences}
+        </span>
       )}
       {value}
     </div>

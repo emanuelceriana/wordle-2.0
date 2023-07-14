@@ -1,0 +1,81 @@
+.keyboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 600px;
+  flex-wrap: wrap;
+
+  .keyboardButton {
+    height: 50px;
+    width: 50px;
+    font-size: 1em;
+    text-transform: capitalize;
+    margin: 3px;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #464347;
+    cursor: pointer;
+    position: relative;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.74);
+    }
+
+    &:nth-child(21) {
+      flex-basis: 125px;
+
+      svg {
+        rotate: 90deg;
+      }
+    }
+
+    &:nth-child(28) {
+      flex-basis: 95px;
+    }
+
+    &__green {
+      background-color: rgba(43, 248, 43, 0.459) !important;
+    }
+
+    &__yellow {
+      background-color: rgba(255, 217, 0, 0.829) !important;
+    }
+
+    &__black {
+      background-color: rgba(0, 0, 0, 0.514) !important;
+    }
+  }
+}
+
+// .keyboard
+
+// .keyboard .keyboardButton.green {
+
+// }
+
+// .keyboard .keyboardButton.yellow {
+//   background-color: rgba(255, 217, 0, 0.829) !important;
+// }
+
+// .keyboard .keyboardButton.black {
+//   background-color: rgba(0, 0, 0, 0.514) !important;
+// }
+
+// .keyboard .keyboardButton:hover {
+//   background-color: rgba(128, 128, 128, 0.74);
+// }
+
+// .keyboard .keyboardButton:nth-child(21) {
+//   flex-basis: 125px;
+// }
+
+// .keyboard .keyboardButton:nth-child(21) svg {
+//   rotate: 90deg;
+// }
+
+// .keyboard .keyboardButton:nth-child(28) {
+//   flex-basis: 95px;
+// }

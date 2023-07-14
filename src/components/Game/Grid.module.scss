@@ -2,9 +2,9 @@
   margin: 1em 0 2em 0;
   overflow-y: auto;
   max-height: 455px;
-}
 
-.grid:focus {
-  outline: none;
-  box-shadow: none;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
 }

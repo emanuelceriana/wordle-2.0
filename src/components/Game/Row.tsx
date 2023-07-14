@@ -1,18 +1,13 @@
-import { forwardRef, useEffect, useMemo, useState } from "react";
+import { forwardRef, useContext, useEffect, useMemo, useState } from "react";
+import { AppContext, IAppContext } from "../../context/AppContext";
 import { LetterBlock } from "./LetterBlock";
-import "./Row.css";
-import { useCreateObjectList } from "./hooks/useCreateObjectList";
-import useKeyDown from "./hooks/useKeyDown";
-import { ValidationArray, isCorrectWord } from "./utils";
+import { useCreateObjectList } from "../hooks/useCreateObjectList";
+import useKeyDown from "../hooks/useKeyDown";
+import { ValidationArray, isCorrectWord } from "../utils";
+import styles from "./Row.module.scss";
 
 interface RowProps {
   idx: number;
-  activeRowIdx: number;
-  wordLength: number;
-  randomWord: string;
-  setActiveRowIdx: (idx: number) => void;
-  setIsWinner: (value: boolean) => void;
-  setIsEndGame: (value: boolean) => void;
   setGlobalWordArrayValidation: (value: ValidationArray[]) => void;
 }
 
@@ -24,19 +19,16 @@ export interface RowRef {
 }
 
 export const Row = forwardRef<HTMLDivElement, RowProps>(
-  (
-    {
-      idx,
-      activeRowIdx,
-      wordLength,
-      randomWord,
+  ({ idx, setGlobalWordArrayValidation }, rowRef) => {
+    const {
       setActiveRowIdx,
       setIsWinner,
       setIsEndGame,
-      setGlobalWordArrayValidation,
-    },
-    rowRef
-  ) => {
+      randomWord,
+      wordLength,
+      activeRowIdx,
+    } = useContext<IAppContext>(AppContext);
+
     const [focusedInputIdx, setFocusedInputIdx] = useState(
       defaultFocusedInputIdx
     );
@@ -59,6 +51,7 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(
       randomWord,
     });
 
+    // -> llevar a otro lado
     useEffect(() => {
       setGlobalWordArrayValidation(wordArrayValidation);
       if (isCorrectWord(wordArrayValidation)) {
@@ -66,9 +59,15 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(
         setIsEndGame(true);
       }
     }, [wordArrayValidation]);
+    // <-
 
     return (
-      <div ref={rowRef} className="row" tabIndex={-1} onKeyDown={handleKeyDown}>
+      <div
+        ref={rowRef}
+        className={styles.row}
+        tabIndex={-1}
+        onKeyDown={handleKeyDown}
+      >
         {wordLength &&
           rowInputs.map(({ id }, idx) => (
             <LetterBlock

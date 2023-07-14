@@ -7,8 +7,7 @@ import {
 } from "react";
 import KeyboardSound from "../../assets/keyboardSound.wav";
 import NextWordSound from "../../assets/nextWordSound.wav";
-import AppContext from "../../context/AppContext";
-import { IAppContext } from "../../providers/GlobalProvider";
+import { IAppContext, AppContext } from "../../context/AppContext";
 import { ValidationArray, getAmountOfLetters, validateWord } from "../utils";
 
 interface KeyDownProps {
@@ -46,8 +45,6 @@ const useKeyDown = ({
   const handleKeyDown: KeyboardEventHandler<HTMLElement> = useCallback(
     (e: KeyboardEvent) => {
       if (isRowActive) {
-        const ks = new Audio(KeyboardSound);
-        const nw = new Audio(NextWordSound);
         const keyPressed = e.key.toLowerCase();
         if (
           keyPressed === "enter" &&

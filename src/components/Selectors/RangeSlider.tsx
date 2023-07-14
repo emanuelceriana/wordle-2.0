@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import "./RangeSlider.css";
+import styles from "./RangeSlider.module.scss";
 
 interface RangeSliderProps {
   defaultValue: number;
@@ -10,17 +10,17 @@ export const RangeSlider = ({
   defaultValue,
   onChangeRequest,
 }: RangeSliderProps) => {
-  const [tryCount, setTryCount] = useState<number>(defaultValue);
+  const [triesCount, setTriesCount] = useState<number>(defaultValue);
 
   const handleChangeRangeSlider = (e: ChangeEvent<HTMLInputElement>) => {
-    setTryCount(parseInt(e.target.value));
+    setTriesCount(parseInt(e.target.value));
     onChangeRequest(parseInt(e.target.value));
   };
 
   return (
-    <div className="rangeSlider">
-      <span className="label">Try Count:</span>
-      <div className="input">
+    <div className={styles.rangeSlider}>
+      <span className={styles["rangeSlider__label"]}>Try Count:</span>
+      <div className={styles["rangeSlider__input"]}>
         <span>1</span>
         <input
           type="range"
@@ -28,11 +28,10 @@ export const RangeSlider = ({
           min={1}
           max={50}
           step={1}
-          value={tryCount}
-          className="custom-slider"
+          value={triesCount}
         ></input>
         <span>50</span>
-        <div className="counter">{tryCount}</div>
+        <div className={styles["rangeSlider__counter"]}>{triesCount}</div>
       </div>
     </div>
   );

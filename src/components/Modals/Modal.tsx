@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import "./Modal.css";
+import styles from "./Modal.module.scss";
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,7 +9,7 @@ interface ModalProps {
   children: ReactNode | ReactNode[];
 }
 
-const Modal = ({
+export const Modal = ({
   isOpen,
   onCloseRequest,
   showCloseButton,
@@ -22,16 +22,19 @@ const Modal = ({
 
   return (
     <>
-      <div className="modalBackground" />
+      <div className={styles.modalBg} />
 
-      <div className="modal">
-        <div className="title">{title}</div>
+      <div className={styles["modalBg__modal"]}>
+        <div className={styles["modalBg__modal-title"]}>{title}</div>
         {showCloseButton && (
-          <button className="closeButton" onClick={onCloseRequest}>
+          <button
+            className={styles["modalBg__modal-cButton"]}
+            onClick={onCloseRequest}
+          >
             X
           </button>
         )}
-        <div className="body">{children}</div>
+        <div className={styles["modalBg__modal-body"]}>{children}</div>
       </div>
     </>
   );
