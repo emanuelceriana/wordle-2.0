@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { IAppContext, AppContext } from "../../context/AppContext";
 import {
   faArrowTurnDown,
   faDeleteLeft,
@@ -6,18 +8,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import cn from "classnames";
 import { keyboardButtons } from "./constants";
 import { useCreateObjectList } from "../hooks/useCreateObjectList";
-import { GlobalWordArray } from "./Grid";
 import styles from "./Keyboard.module.scss";
 
 interface KeyboardProps {
-  globalWordArrayValidation: GlobalWordArray;
   activeRow: HTMLDivElement | null;
 }
 
-export const Keyboard = ({
-  globalWordArrayValidation,
-  activeRow,
-}: KeyboardProps) => {
+export const Keyboard = ({ activeRow }: KeyboardProps) => {
+  const { globalWordValidation } = useContext<IAppContext>(AppContext);
   const { objectList: keyboardButtonsIds } = useCreateObjectList({
     length: keyboardButtons.length,
   });
@@ -40,15 +38,15 @@ export const Keyboard = ({
             styles.keyboardButton,
             {
               [styles["keyboardButton__green"]]:
-                globalWordArrayValidation[keyboardButtons[idx]] === 1,
+                globalWordValidation[keyboardButtons[idx]] === 1,
             },
             {
               [styles["keyboardButton__yellow"]]:
-                globalWordArrayValidation[keyboardButtons[idx]] === 0,
+                globalWordValidation[keyboardButtons[idx]] === 0,
             },
             {
               [styles["keyboardButton__black"]]:
-                globalWordArrayValidation[keyboardButtons[idx]] === -1,
+                globalWordValidation[keyboardButtons[idx]] === -1,
             }
           )}
           onClick={() => handleClick(keyboardButtons[idx])}

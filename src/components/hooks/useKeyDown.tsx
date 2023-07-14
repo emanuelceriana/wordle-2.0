@@ -5,10 +5,9 @@ import {
   useContext,
   useState,
 } from "react";
-import KeyboardSound from "../../assets/keyboardSound.wav";
-import NextWordSound from "../../assets/nextWordSound.wav";
-import { IAppContext, AppContext } from "../../context/AppContext";
-import { ValidationArray, getAmountOfLetters, validateWord } from "../utils";
+
+import { AppContext, IAppContext } from "../../context/AppContext";
+import { getAmountOfLetters, validateWord, ValidationArray } from "../../utils";
 
 interface KeyDownProps {
   isRowActive: boolean;
@@ -33,14 +32,16 @@ const useKeyDown = ({
   wordLength,
   randomWord,
 }: KeyDownProps) => {
-  const [wordArrayValidation, setWordArrayValidation] = useState<
+  const [wordInputValidation, setWordInputValidation] = useState<
     ValidationArray[]
   >([]);
+  const { playSound, playlist, handleGlobalWordValidation } =
+    useContext<IAppContext>(AppContext);
 
-  const ks = new Audio(KeyboardSound);
-  const nw = new Audio(NextWordSound);
-
-  const { isSoundFxActive } = useContext<IAppContext>(AppContext);
+  const validate = (randomWord: string, inputValues: string[]) => {
+    handleGlobalWordValidation(validateWord(randomWord, inputValues));
+    setWordInputValidation(validateWord(randomWord, inputValues));
+  };
 
   const handleKeyDown: KeyboardEventHandler<HTMLElement> = useCallback(
     (e: KeyboardEvent) => {
@@ -50,10 +51,10 @@ const useKeyDown = ({
           keyPressed === "enter" &&
           getAmountOfLetters(inputValues) === wordLength
         ) {
-          setWordArrayValidation(validateWord(randomWord, inputValues));
+          validate(randomWord, inputValues);
           setFocusedInputIdx(0);
           setActiveRowIdx(activeRowIdx + 1);
-          isSoundFxActive && nw.play();
+          playSound(playlist.Try);
         } else if (keyPressed === "backspace") {
           if (
             inputValues[focusedInputIdx] &&
@@ -69,30 +70,24 @@ const useKeyDown = ({
           ) {
             setFocusedInputIdx(focusedInputIdx - 1);
           }
-          isSoundFxActive && ks.play();
+          playSound(playlist.Keyboard);
         } else if (/^[a-z]$/.test(keyPressed)) {
           const updatedValues = [...inputValues];
           updatedValues[focusedInputIdx] = keyPressed;
           setInputValues(updatedValues);
-          isSoundFxActive && ks.play();
+          playSound(playlist.Keyboard);
           if (focusedInputIdx < wordLength - 1) {
             setFocusedInputIdx(focusedInputIdx + 1);
           }
         }
       }
     },
-    [
-      isRowActive,
-      inputValues,
-      focusedInputIdx,
-      setActiveRowIdx,
-      isSoundFxActive,
-    ]
+    [isRowActive, inputValues, focusedInputIdx, setActiveRowIdx]
   );
 
   return {
     handleKeyDown,
-    wordArrayValidation,
+    wordInputValidation,
   };
 };
 

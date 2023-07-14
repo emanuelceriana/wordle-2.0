@@ -1,7 +1,7 @@
 import * as cn from "classnames";
 import { useCallback, useEffect, useRef } from "react";
-import { ValidationArray } from "../utils";
 import styles from "./LetterBlock.module.scss";
+import { ValidationArray } from "../../utils";
 
 interface LetterBlockProps {
   focusable: boolean;
@@ -40,9 +40,15 @@ export const LetterBlock = ({
         styles.letterBlock,
         { [styles.disabled]: !focusable },
         { [styles.focused]: isFocused },
-        { [styles["letterBlock__green"]]: inputValidation?.value === 1 },
-        { [styles["letterBlock__yellow"]]: inputValidation?.value === 0 },
-        { [styles["letterBlock__black"]]: inputValidation?.value === -1 }
+        {
+          [styles["letterBlock__green"]]: inputValidation?.value === 1,
+        },
+        {
+          [styles["letterBlock__yellow"]]: inputValidation?.value === 0,
+        },
+        {
+          [styles["letterBlock__black"]]: inputValidation?.value === -1,
+        }
       )}
       tabIndex={-1}
       ref={blockRef}

@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
+import { useCallback } from "react";
 import wordsDS from "../../data/wordsDataSet.json";
 
 interface GetRandomWordProps {
   wordLength: number;
 }
 
-export const useGetRandomWord = ({ wordLength }: GetRandomWordProps) => {
-  const [randomWord, setRandomWord] = useState<string>();
-
-  useEffect(() => {
+export const useGenerateRandomWord = ({ wordLength }: GetRandomWordProps) => {
+  const generate = useCallback(() => {
     let possibleWords: string[] = [];
 
     for (const [key, words] of Object.entries(wordsDS)) {
@@ -20,10 +18,10 @@ export const useGetRandomWord = ({ wordLength }: GetRandomWordProps) => {
     const randomIndex: number = Math.floor(
       Math.random() * possibleWords.length
     );
-    setRandomWord(possibleWords[randomIndex]);
+    return possibleWords[randomIndex];
   }, [wordLength]);
 
   return {
-    randomWord,
+    generate,
   };
 };
