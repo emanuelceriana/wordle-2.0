@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { IAppContext, AppContext } from "../../context/AppContext";
 import {
   faArrowTurnDown,
@@ -11,23 +11,27 @@ import { useCreateObjectList } from "../hooks/useCreateObjectList";
 import styles from "./Keyboard.module.scss";
 
 interface KeyboardProps {
-  activeRow: HTMLDivElement | null;
+  rowRefs: React.MutableRefObject<HTMLDivElement[]>;
 }
 
-export const Keyboard = ({ activeRow }: KeyboardProps) => {
-  const { globalWordValidation } = useContext<IAppContext>(AppContext);
+export const Keyboard = ({ rowRefs }: KeyboardProps) => {
+  const { globalWordValidation, activeRowIdx } =
+    useContext<IAppContext>(AppContext);
   const { objectList: keyboardButtonsIds } = useCreateObjectList({
     length: keyboardButtons.length,
   });
 
-  const handleClick = (letter: string) => {
-    const event = new KeyboardEvent("keydown", {
-      key: letter,
-      bubbles: true,
-    });
+  const handleClick = useCallback(
+    (letter: string) => {
+      const event = new KeyboardEvent("keydown", {
+        key: letter,
+        bubbles: true,
+      });
 
-    activeRow?.dispatchEvent(event);
-  };
+      rowRefs.current[activeRowIdx].dispatchEvent(event);
+    },
+    [rowRefs]
+  );
 
   return (
     <div className={styles.keyboard}>

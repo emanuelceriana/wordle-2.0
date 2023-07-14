@@ -12,15 +12,9 @@ interface RowProps {
 
 const defaultFocusedInputIdx = 0;
 
-export interface RowRef {
-  element: HTMLDivElement | null;
-  handleKeyDown: (e: KeyboardEvent | React.KeyboardEvent<HTMLElement>) => void;
-}
-
 export const Row = forwardRef<HTMLDivElement, RowProps>(({ idx }, rowRef) => {
   const {
     setActiveRowIdx,
-
     randomWord,
     wordLength,
     activeRowIdx,

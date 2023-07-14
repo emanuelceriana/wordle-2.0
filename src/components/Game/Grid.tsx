@@ -7,11 +7,11 @@ import useClickOutside from "../hooks/useClickOutside";
 import { useCreateObjectList } from "../hooks/useCreateObjectList";
 
 export const Grid = ({}) => {
+  const rowRefs = useRef<HTMLDivElement[]>([]);
+
   const { activeRowIdx, triesCount } = useContext<IAppContext>(AppContext);
 
   const { objectList: gridRows } = useCreateObjectList({ length: triesCount });
-
-  const rowRefs = useRef<HTMLDivElement[]>([]);
 
   useClickOutside({ rowRefs, activeRowIdx });
 
@@ -27,7 +27,7 @@ export const Grid = ({}) => {
             />
           ))}
       </div>
-      <Keyboard activeRow={rowRefs.current[activeRowIdx]} />
+      <Keyboard rowRefs={rowRefs} />
     </>
   );
 };
