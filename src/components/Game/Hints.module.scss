@@ -1,0 +1,55 @@
+.hintBox {
+  display: flex;
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 400px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  margin-top: 10vh;
+  margin-left: 5vw;
+  height: 150px;
+
+  .hintText {
+    padding: 1em;
+    width: 90%;
+  }
+
+  .left,
+  .right {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    width: 5%;
+  }
+
+  .left:hover,
+  .right:hover {
+    color: gold;
+    background: rgba(124, 122, 122, 0.178);
+    cursor: pointer;
+  }
+
+  .error {
+    width: 100%;
+  }
+
+  .hidingHint {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+    button {
+      min-width: 300px;
+      margin: 1em;
+    }
+  }
+
+  .hidden {
+    visibility: hidden;
+    cursor: not-allowed;
+  }
+}

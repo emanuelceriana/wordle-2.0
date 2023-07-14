@@ -5,6 +5,7 @@ import { Keyboard } from "./Keyboard";
 import { Row } from "./Row";
 import useClickOutside from "../hooks/useClickOutside";
 import { useCreateObjectList } from "../hooks/useCreateObjectList";
+import { Hints } from "./Hints";
 
 export const Grid = ({}) => {
   const rowRefs = useRef<HTMLDivElement[]>([]);
@@ -17,17 +18,24 @@ export const Grid = ({}) => {
 
   return (
     <>
-      <div className={styles.grid}>
-        {triesCount &&
-          gridRows.map(({ id }, idx) => (
-            <Row
-              key={id}
-              idx={idx}
-              ref={(ref: HTMLDivElement) => (rowRefs.current[idx] = ref)}
-            />
-          ))}
+      <div className={styles.panel}>
+        <div className={styles.left}>
+          <div className={styles.grid}>
+            {triesCount &&
+              gridRows.map(({ id }, idx) => (
+                <Row
+                  key={id}
+                  idx={idx}
+                  ref={(ref: HTMLDivElement) => (rowRefs.current[idx] = ref)}
+                />
+              ))}
+          </div>
+          <Keyboard rowRefs={rowRefs} />
+        </div>
+        <div className={styles.right}>
+          <Hints />
+        </div>
       </div>
-      <Keyboard rowRefs={rowRefs} />
     </>
   );
 };

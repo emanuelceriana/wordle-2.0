@@ -43,3 +43,20 @@ export const isCorrectWord = (validationArray: ValidationArray[]) => {
   const uniqueValues: number[] = [...new Set(values)];
   return uniqueValues.length === 1 && uniqueValues[0] === 1;
 };
+
+export const shuffleArray = (array: any[]) => {
+  let currentIndex = array.length,
+    randomIndex;
+
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+};

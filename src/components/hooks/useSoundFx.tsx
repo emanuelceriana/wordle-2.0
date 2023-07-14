@@ -4,12 +4,16 @@ import KeyboardSound from "../../assets/keyboardSound.wav";
 import LoseSound from "../../assets/loseSound.wav";
 import NextWordSound from "../../assets/nextWordSound.wav";
 import WinSound from "../../assets/winSound.wav";
+import RevealHint from "../../assets/reveal.wav";
+import MouseClick from "../../assets/mouseclick.wav";
 
 export enum PlaylistValidKeys {
   Win = "winSound",
   Lose = "loseSound",
   Keyboard = "keyboardSound",
   Try = "nextTrySound",
+  Reveal = "revealHint",
+  Click = "mouseClick",
 }
 
 type Playlist = {
@@ -21,6 +25,8 @@ const playlist: Playlist = {
   [PlaylistValidKeys.Lose]: LoseSound,
   [PlaylistValidKeys.Keyboard]: KeyboardSound,
   [PlaylistValidKeys.Try]: NextWordSound,
+  [PlaylistValidKeys.Reveal]: RevealHint,
+  [PlaylistValidKeys.Click]: MouseClick,
 };
 
 interface SoundFxProps {

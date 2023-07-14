@@ -7,12 +7,15 @@ import { useGenerateRandomWord } from "../components/hooks/useGenerateRandomWord
 import { useSoundFx } from "../components/hooks/useSoundFx";
 import AppContext from "../context/AppContext";
 import { ValidationArray } from "../utils";
+import { QueryClient, QueryClientProvider } from "react-query";
 interface GlobalProviderProps {
   children: ReactNode | ReactNode[];
 }
 export interface GlobalWordValidation {
   [key: string]: number;
 }
+
+const queryClient = new QueryClient();
 
 export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [isMainMenuOpen, setIsMainMenuOpen] = useState<boolean>(true);
@@ -108,7 +111,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         restartGame,
       }}
     >
-      {children}
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </AppContext.Provider>
   );
 };
