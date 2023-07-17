@@ -8,14 +8,23 @@ import { useSoundFx } from "../components/hooks/useSoundFx";
 import AppContext from "../context/AppContext";
 import { ValidationArray } from "../utils";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { useLocalStorage } from "../components/hooks/useLocalStorage";
 interface GlobalProviderProps {
   children: ReactNode | ReactNode[];
 }
+
+export interface UserSettings {
+  isSoundFxActive: boolean;
+  isHardModeActive: boolean;
+}
+
+const defaultUserSettings = {
+  isSoundFxActive: true,
+  isHardModeActive: false,
+};
 export interface GlobalWordValidation {
   [key: string]: number;
 }
-
-const queryClient = new QueryClient();
 
 export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [isMainMenuOpen, setIsMainMenuOpen] = useState<boolean>(true);
@@ -24,7 +33,6 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [isGridReady, setIsGridReady] = useState<boolean>(false);
   const [isHelpMenuOpen, setIsHelpMenuOpen] = useState<boolean>(false);
   const [isSettingsMenuOpen, setIsSettingsMenuOpen] = useState<boolean>(false);
-  const [isSoundFxActive, setIsSoundFxActive] = useState<boolean>(true);
   const [isEndGame, setIsEndGame] = useState<boolean>(false);
   const [isWinner, setIsWinner] = useState<boolean>(false);
   const [activeRowIdx, setActiveRowIdx] = useState<number>(0);
@@ -32,15 +40,29 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [globalWordValidation, setGlobalWordValidation] =
     useState<GlobalWordValidation>({});
 
-  const { generate: generateWord } = useGenerateRandomWord({ wordLength });
+  const queryClient = new QueryClient();
 
-  const startGame = () => {
+  const { getLocalStorage, setLocalStorage } = useLocalStorage();
+  const [userSettings, setUserSettings] = useState<UserSettings>(
+    getLocalStorage("userSettings") || defaultUserSettings
+  );
+
+  const { generate: generateWord } = useGenerateRandomWord({
+    wordLength,
+    queryClient,
+  });
+
+  useEffect(() => {
+    setLocalStorage("userSettings", userSettings);
+  }, [userSettings]);
+
+  const startGame = async () => {
     setIsMainMenuOpen(false);
     setIsGridReady(true);
-    setRandomWord(generateWord());
+    setRandomWord(await generateWord());
   };
 
-  const restartGame = () => {
+  const restartGame = async () => {
     setIsGridReady(false);
     setTriesCount(defaultTriesCount);
     setWordLength(defaultWordLength);
@@ -50,15 +72,17 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
     setIsWinner(false);
     setActiveRowIdx(0);
     setGlobalWordValidation({});
-    setRandomWord(generateWord());
+    setRandomWord(await generateWord());
   };
 
-  const { play: playSound, playlist } = useSoundFx({ isSoundFxActive });
+  const { play: playSound, playlist } = useSoundFx({
+    isSoundFxActive: userSettings.isSoundFxActive,
+  });
 
   useEffect(() => {
     if (isEndGame)
       isWinner ? playSound(playlist.Win) : playSound(playlist.Lose);
-  }, [isEndGame, isWinner]);
+  }, [isEndGame, isWinner, playSound]);
 
   useEffect(() => {
     if (activeRowIdx === triesCount) setIsEndGame(true);
@@ -94,8 +118,6 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         setIsHelpMenuOpen,
         isSettingsMenuOpen,
         setIsSettingsMenuOpen,
-        isSoundFxActive,
-        setIsSoundFxActive,
         playSound,
         playlist,
         isEndGame,
@@ -107,6 +129,8 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         setActiveRowIdx,
         globalWordValidation,
         handleGlobalWordValidation,
+        userSettings,
+        setUserSettings,
         startGame,
         restartGame,
       }}

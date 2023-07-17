@@ -58,7 +58,6 @@ export const HelpMenu = () => {
         <SimpleExplanation>
           To start playing you need just to write a word with the length of the
           squares availables, you can use the virtual keyboard if you want.
-          SimpleExplanation
         </SimpleExplanation>
         <SimpleExplanation>
           <b>Easy Mode:</b> For each try you don't need to write word. A chain

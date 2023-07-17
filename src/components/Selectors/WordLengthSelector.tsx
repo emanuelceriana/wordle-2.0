@@ -4,6 +4,9 @@ import wordsDS from "../../data/wordsDataSet.json";
 import { useCreateObjectList } from "../hooks/useCreateObjectList";
 import styles from "./WordLengthSelector.module.scss";
 
+const maxWordsLength = 9;
+const minWordsLength = 4;
+
 interface WordLengthSelectorProps {
   defaultValue: number;
   onClickRequest: (key: number) => void;
@@ -16,7 +19,7 @@ export const WordLengthSelector = ({
   const [optionSelected, setOptionSelected] = useState<number>(defaultValue);
 
   const { objectList: wordLengthButtons } = useCreateObjectList({
-    length: Object.keys(wordsDS).length,
+    length: maxWordsLength,
   });
 
   const handleClickAction = (key: string) => {
@@ -29,18 +32,18 @@ export const WordLengthSelector = ({
       <div className={styles.wordLengthSelector}>
         <span>Word Length:</span>
         <div className={styles["wordLengthSelector__buttons"]}>
-          {wordLengthButtons.map(({ id }, idx) => {
-            const key = Object.keys(wordsDS)[idx];
+          {wordLengthButtons.slice(3).map(({ id }, idx) => {
+            const minIdx = idx + minWordsLength;
             return (
               <button
                 key={id}
                 className={cn(styles["wordLengthSelector__button"], {
                   [styles["wordLengthSelector__selected"]]:
-                    optionSelected.toString() === key,
+                    optionSelected === minIdx,
                 })}
-                onClick={() => handleClickAction(key)}
+                onClick={() => handleClickAction(minIdx.toString())}
               >
-                {key}
+                {minIdx}
               </button>
             );
           })}

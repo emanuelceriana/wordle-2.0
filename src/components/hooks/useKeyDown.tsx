@@ -82,7 +82,7 @@ const useKeyDown = ({
         }
       }
     },
-    [isRowActive, inputValues, focusedInputIdx, setActiveRowIdx]
+    [isRowActive, inputValues, focusedInputIdx, setActiveRowIdx, playSound]
   );
 
   return {

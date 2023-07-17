@@ -1,4 +1,4 @@
-import { useContext, useState, useCallback, useMemo } from "react";
+import { useContext, useState, useCallback, useMemo, useEffect } from "react";
 import { IAppContext, AppContext } from "../../context/AppContext";
 import { useQuery, UseQueryResult } from "react-query";
 import { fetchHints, SimplifiedHint } from "../../api";
@@ -13,13 +13,22 @@ export const Hints = () => {
   const { randomWord, playSound, playlist } =
     useContext<IAppContext>(AppContext);
 
-  const { data: hints, error }: UseQueryResult<SimplifiedHint[], Error> =
-    useQuery(["hints", randomWord], () => fetchHints(randomWord));
+  const {
+    data: hints,
+    error,
+    refetch,
+    isLoading,
+  }: UseQueryResult<SimplifiedHint[], Error> = useQuery(
+    ["hints", randomWord],
+    () => fetchHints(randomWord),
+    { enabled: false }
+  );
 
   const handleHints = useCallback(() => {
-    playSound(playlist.Reveal);
+    refetch();
+    !isLoading && playSound(playlist.Reveal);
     setShowHints(true);
-  }, [hints, indexHint]);
+  }, [hints, indexHint, isLoading, playSound]);
 
   const showLeftButton = useMemo(() => {
     return indexHint !== 0;
@@ -29,15 +38,18 @@ export const Hints = () => {
     return hints && hints.length && indexHint < hints.length - 1;
   }, [hints, indexHint]);
 
-  const handleArrowClick = (number: number) => {
-    playSound(playlist.Click);
-    setIndexHint((index: number) => index + number);
-  };
+  const handleArrowClick = useCallback(
+    (number: number) => {
+      playSound(playlist.Click);
+      setIndexHint((index: number) => index + number);
+    },
+    [playSound]
+  );
 
   return (
     <div className={styles.hintBox}>
-      {showHints ? (
-        error || !hints?.length ? (
+      {showHints && !isLoading ? (
+        error || (!hints?.length && !isLoading) ? (
           <div className={styles.error}>
             Ups... you shouldn't be seeing this! 😳
           </div>
@@ -72,14 +84,20 @@ export const Hints = () => {
         )
       ) : (
         <div className={styles.hidingHint}>
-          <button onClick={handleHints}>Hint</button>
-          <div>
-            <b>Note:</b>{" "}
-            <i>
-              Some hints make the game 99% simple so think twice before clicking
-              🤔
-            </i>
-          </div>
+          {isLoading ? (
+            <div>Searching hints... 🕵</div>
+          ) : (
+            <>
+              <button onClick={handleHints}>Hint</button>
+              <div>
+                <b>Note:</b>{" "}
+                <i>
+                  Some hints make the game 99% simpler so think twice before
+                  clicking 🤔
+                </i>
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>

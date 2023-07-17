@@ -1,10 +1,10 @@
 import { shuffleArray } from "../utils";
-import { dictionaryUrl } from "./urls";
+import { dictionaryUrl, randomWordUrl } from "./urls";
 
 interface Hint {
   entries: {
     senses: {
-      shortDefinitions: string[];
+      definitions: string[];
     }[];
   }[];
   lexicalCategory: {
@@ -27,9 +27,8 @@ export const fetchHints = (word: string) => {
           data.results[0].lexicalEntries?.map((hint: Hint) => {
             const shortDefinitionsArray: string[] = [];
 
-            hint.entries[0].senses?.map(({ shortDefinitions }) => {
-              shortDefinitions &&
-                shortDefinitionsArray.push(shortDefinitions[0]);
+            hint.entries[0].senses?.map(({ definitions }) => {
+              definitions && shortDefinitionsArray.push(definitions[0]);
             });
 
             hints.push({
@@ -46,4 +45,19 @@ export const fetchHints = (word: string) => {
         return error;
       });
   });
+};
+
+export const fetchRandomWord = (wordLength: number) => {
+  return fetch(`${randomWordUrl}?words=1&length=${wordLength}`).then(
+    (response) => {
+      return response
+        .json()
+        .then((data) => {
+          return data?.[0];
+        })
+        .catch((error) => {
+          return error;
+        });
+    }
+  );
 };
