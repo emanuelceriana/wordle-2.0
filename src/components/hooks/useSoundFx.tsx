@@ -8,25 +8,25 @@ import RevealHint from "../../assets/reveal.wav";
 import MouseClick from "../../assets/mouseclick.wav";
 
 export enum PlaylistValidKeys {
-  Win = "winSound",
-  Lose = "loseSound",
-  Keyboard = "keyboardSound",
-  Try = "nextTrySound",
-  Reveal = "revealHint",
-  Click = "mouseClick",
+  Win = "Win",
+  Lose = "Lose",
+  Keyboard = "Keyboard",
+  Try = "Try",
+  Reveal = "Reveal",
+  Click = "Click",
 }
 
 type Playlist = {
-  [K in PlaylistValidKeys]: string;
+  [K in PlaylistValidKeys]: HTMLAudioElement;
 };
 
 const playlist: Playlist = {
-  [PlaylistValidKeys.Win]: WinSound,
-  [PlaylistValidKeys.Lose]: LoseSound,
-  [PlaylistValidKeys.Keyboard]: KeyboardSound,
-  [PlaylistValidKeys.Try]: NextWordSound,
-  [PlaylistValidKeys.Reveal]: RevealHint,
-  [PlaylistValidKeys.Click]: MouseClick,
+  [PlaylistValidKeys.Win]: new Audio(WinSound),
+  [PlaylistValidKeys.Lose]: new Audio(LoseSound),
+  [PlaylistValidKeys.Keyboard]: new Audio(KeyboardSound),
+  [PlaylistValidKeys.Try]: new Audio(NextWordSound),
+  [PlaylistValidKeys.Reveal]: new Audio(RevealHint),
+  [PlaylistValidKeys.Click]: new Audio(MouseClick),
 };
 
 interface SoundFxProps {
@@ -35,14 +35,17 @@ interface SoundFxProps {
 
 export const useSoundFx = ({ isSoundFxActive }: SoundFxProps) => {
   const play = useCallback(
-    (sound: PlaylistValidKeys) => {
-      isSoundFxActive && new Audio(playlist[sound]).play();
+    (sound: HTMLAudioElement) => {
+      if (isSoundFxActive) {
+        sound.currentTime = 0;
+        sound.play();
+      }
     },
     [isSoundFxActive]
   );
 
   return {
     play,
-    playlist: PlaylistValidKeys,
+    playlist,
   };
 };

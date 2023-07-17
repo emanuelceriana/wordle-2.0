@@ -1,12 +1,25 @@
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
 import { IAppContext, AppContext } from "../../context/AppContext";
 import { Modal } from "./Modal";
 import { ToggleButton } from "../Buttons/ToggleButton";
 import styles from "./SettingsMenu.module.scss";
 
 export const SettingsMenu = () => {
-  const { isSettingsMenuOpen, setIsSettingsMenuOpen, restartGame } =
-    useContext<IAppContext>(AppContext);
+  const {
+    isSettingsMenuOpen,
+    userSettings,
+    setUserSettings,
+    setIsSettingsMenuOpen,
+    restartGame,
+  } = useContext<IAppContext>(AppContext);
+
+  const handleOnToggle = useCallback(() => {
+    const modifiedUserSettings = {
+      ...userSettings,
+      isHardModeActive: !userSettings.isHardModeActive,
+    };
+    setUserSettings(modifiedUserSettings);
+  }, [userSettings]);
 
   return (
     <Modal
@@ -19,7 +32,10 @@ export const SettingsMenu = () => {
         <div className={styles["settingsMenu__caseBlock"]}>
           <div>Hard Mode:</div>
           <div className={styles.explanation}>
-            <ToggleButton disabled={true} />
+            <ToggleButton
+              value={userSettings.isHardModeActive}
+              onToggle={handleOnToggle}
+            />
           </div>
         </div>
         <button onClick={restartGame}>Restart Game</button>

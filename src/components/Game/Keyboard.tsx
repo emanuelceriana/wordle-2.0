@@ -23,7 +23,7 @@ export const Keyboard = ({ rowRefs }: KeyboardProps) => {
 
   const handleClick = useCallback(
     (letter: string) => {
-      const event = new KeyboardEvent("keydown", {
+      const event = new KeyboardEvent("keyup", {
         key: letter,
         bubbles: true,
       });

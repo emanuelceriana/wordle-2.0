@@ -1,0 +1,42 @@
+.notification {
+  position: absolute;
+  top: 10%;
+  left: 42%;
+
+  .message {
+    background-color: rgba(223, 211, 211, 0.904);
+    color: black;
+    width: 225px;
+    padding: 0.5em;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1em;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.animation {
+  animation-name: float-hide;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes float-hide {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(30%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(30%);
+    opacity: 0;
+  }
+}

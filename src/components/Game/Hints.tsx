@@ -1,4 +1,4 @@
-import { useContext, useState, useCallback, useMemo, useEffect } from "react";
+import { useContext, useState, useCallback, useMemo } from "react";
 import { IAppContext, AppContext } from "../../context/AppContext";
 import { useQuery, UseQueryResult } from "react-query";
 import { fetchHints, SimplifiedHint } from "../../api";

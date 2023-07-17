@@ -9,7 +9,7 @@ import {
 import { AppContext, IAppContext } from "../../context/AppContext";
 import { getAmountOfLetters, validateWord, ValidationArray } from "../../utils";
 
-interface KeyDownProps {
+interface KeyUpProps {
   isRowActive: boolean;
   setFocusedInputIdx: (idx: number) => void;
   setActiveRowIdx: (idx: number) => void;
@@ -21,7 +21,13 @@ interface KeyDownProps {
   randomWord: string;
 }
 
-const useKeyDown = ({
+const hardModeMessageError = (
+  <>
+    <b>Hard Mode:</b> The word is not a valid word.
+  </>
+);
+
+const useKeyUp = ({
   isRowActive,
   setFocusedInputIdx,
   setActiveRowIdx,
@@ -31,30 +37,50 @@ const useKeyDown = ({
   focusedInputIdx,
   wordLength,
   randomWord,
-}: KeyDownProps) => {
+}: KeyUpProps) => {
   const [wordInputValidation, setWordInputValidation] = useState<
     ValidationArray[]
   >([]);
-  const { playSound, playlist, handleGlobalWordValidation } =
-    useContext<IAppContext>(AppContext);
+  const {
+    playlist,
+    userSettings,
+    playSound,
+    handleGlobalWordValidation,
+    validateRealWord,
+    setNotification,
+  } = useContext<IAppContext>(AppContext);
 
   const validate = (randomWord: string, inputValues: string[]) => {
     handleGlobalWordValidation(validateWord(randomWord, inputValues));
     setWordInputValidation(validateWord(randomWord, inputValues));
   };
 
-  const handleKeyDown: KeyboardEventHandler<HTMLElement> = useCallback(
-    (e: KeyboardEvent) => {
+  const checkHardMode = useCallback(async () => {
+    let next = true;
+    if (userSettings.isHardModeActive) {
+      const isValidRealWord = await validateRealWord(inputValues.join(""));
+      if (!isValidRealWord) {
+        setNotification(hardModeMessageError);
+      }
+      next = isValidRealWord;
+    }
+    return next;
+  }, [inputValues, userSettings, validateRealWord, setNotification]);
+
+  const handleKeyUp: KeyboardEventHandler<HTMLElement> = useCallback(
+    async (e: KeyboardEvent) => {
       if (isRowActive) {
         const keyPressed = e.key.toLowerCase();
         if (
           keyPressed === "enter" &&
           getAmountOfLetters(inputValues) === wordLength
         ) {
-          validate(randomWord, inputValues);
-          setFocusedInputIdx(0);
-          setActiveRowIdx(activeRowIdx + 1);
-          playSound(playlist.Try);
+          if (await checkHardMode()) {
+            validate(randomWord, inputValues);
+            setFocusedInputIdx(0);
+            setActiveRowIdx(activeRowIdx + 1);
+            playSound(playlist.Try);
+          }
         } else if (keyPressed === "backspace") {
           if (
             inputValues[focusedInputIdx] &&
@@ -82,13 +108,21 @@ const useKeyDown = ({
         }
       }
     },
-    [isRowActive, inputValues, focusedInputIdx, setActiveRowIdx, playSound]
+    [
+      isRowActive,
+      inputValues,
+      focusedInputIdx,
+      userSettings,
+      setActiveRowIdx,
+      playSound,
+      checkHardMode,
+    ]
   );
 
   return {
-    handleKeyDown,
+    handleKeyUp,
     wordInputValidation,
   };
 };
 
-export default useKeyDown;
+export default useKeyUp;

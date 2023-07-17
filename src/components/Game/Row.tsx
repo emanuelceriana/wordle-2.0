@@ -2,7 +2,7 @@ import { forwardRef, useContext, useMemo, useState, useEffect } from "react";
 import { AppContext, IAppContext } from "../../context/AppContext";
 import { LetterBlock } from "./LetterBlock";
 import { useCreateObjectList } from "../hooks/useCreateObjectList";
-import useKeyDown from "../hooks/useKeyDown";
+import useKeyUp from "../hooks/useKeyUp";
 import styles from "./Row.module.scss";
 import { isCorrectWord } from "../../utils";
 
@@ -32,7 +32,7 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(({ idx }, rowRef) => {
     length: wordLength,
   });
 
-  const { handleKeyDown, wordInputValidation } = useKeyDown({
+  const { handleKeyUp, wordInputValidation } = useKeyUp({
     isRowActive,
     setFocusedInputIdx,
     setActiveRowIdx,
@@ -56,7 +56,7 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(({ idx }, rowRef) => {
       ref={rowRef}
       className={styles.row}
       tabIndex={-1}
-      onKeyDown={handleKeyDown}
+      onKeyUp={handleKeyUp}
     >
       {wordLength &&
         rowInputs.map(({ id }, idx) => (

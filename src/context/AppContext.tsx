@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, ReactNode } from "react";
 import { PlaylistValidKeys } from "../components/hooks/useSoundFx";
 import { ValidationArray } from "../utils";
 import {
@@ -32,6 +32,8 @@ export interface IAppContext {
   handleGlobalWordValidation: (x: ValidationArray[]) => void;
   userSettings: UserSettings;
   setUserSettings: (x: UserSettings) => void;
+  validateRealWord: (x: string) => Promise<boolean>;
+  setNotification: (x: ReactNode) => void;
   startGame: () => void;
   restartGame: () => void;
 }

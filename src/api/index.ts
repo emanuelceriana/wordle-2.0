@@ -28,7 +28,9 @@ export const fetchHints = (word: string) => {
             const shortDefinitionsArray: string[] = [];
 
             hint.entries[0].senses?.map(({ definitions }) => {
-              definitions && shortDefinitionsArray.push(definitions[0]);
+              definitions &&
+                definitions[0] !== "" &&
+                shortDefinitionsArray.push(definitions[0]);
             });
 
             hints.push({
@@ -60,4 +62,17 @@ export const fetchRandomWord = (wordLength: number) => {
         });
     }
   );
+};
+
+export const validateWord = (word: string) => {
+  return fetch(`${dictionaryUrl}/${word}`).then((response) => {
+    return response
+      .json()
+      .then((data) => {
+        return !!data;
+      })
+      .catch((error) => {
+        return error;
+      });
+  });
 };

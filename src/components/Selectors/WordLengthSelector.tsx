@@ -1,6 +1,5 @@
 import cn from "classnames";
 import { useState } from "react";
-import wordsDS from "../../data/wordsDataSet.json";
 import { useCreateObjectList } from "../hooks/useCreateObjectList";
 import styles from "./WordLengthSelector.module.scss";
 

@@ -9,6 +9,8 @@ import AppContext from "../context/AppContext";
 import { ValidationArray } from "../utils";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useLocalStorage } from "../components/hooks/useLocalStorage";
+import { useValidateRealWord } from "../components/hooks/useValidateRealWord";
+import { useNotification } from "../components/hooks/useNotification";
 interface GlobalProviderProps {
   children: ReactNode | ReactNode[];
 }
@@ -40,7 +42,13 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [globalWordValidation, setGlobalWordValidation] =
     useState<GlobalWordValidation>({});
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1000,
+      },
+    },
+  });
 
   const { getLocalStorage, setLocalStorage } = useLocalStorage();
   const [userSettings, setUserSettings] = useState<UserSettings>(
@@ -51,6 +59,9 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
     wordLength,
     queryClient,
   });
+
+  const { validate: validateRealWord } = useValidateRealWord({ queryClient });
+  const { NotificationInstance, setNotification } = useNotification();
 
   useEffect(() => {
     setLocalStorage("userSettings", userSettings);
@@ -131,11 +142,16 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         handleGlobalWordValidation,
         userSettings,
         setUserSettings,
+        validateRealWord,
+        setNotification,
         startGame,
         restartGame,
       }}
     >
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        {children}
+        {NotificationInstance}
+      </QueryClientProvider>
     </AppContext.Provider>
   );
 };
