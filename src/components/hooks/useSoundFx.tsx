@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 
-import KeyboardSound from "../../assets/keyboardSound.wav";
-import LoseSound from "../../assets/loseSound.wav";
-import NextWordSound from "../../assets/nextWordSound.wav";
-import WinSound from "../../assets/winSound.wav";
-import RevealHint from "../../assets/reveal.wav";
-import MouseClick from "../../assets/mouseclick.wav";
+import KeyboardSound from "/assets/keyboardSound.wav";
+import LoseSound from "/assets/loseSound.wav";
+import NextWordSound from "/assets/nextWordSound.wav";
+import WinSound from "/assets/winSound.wav";
+import RevealHint from "/assets/reveal.wav";
+import MouseClick from "/assets/mouseclick.wav";
 
 export enum PlaylistValidKeys {
   Win = "Win",

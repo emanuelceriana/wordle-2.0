@@ -1,7 +1,7 @@
-import * as cn from "classnames";
+import cn from "classnames";
 import { useCallback, useEffect, useRef } from "react";
-import styles from "./LetterBlock.module.scss";
 import { ValidationArray } from "../../utils";
+import styles from "./LetterBlock.module.scss";
 
 interface LetterBlockProps {
   focusable: boolean;
