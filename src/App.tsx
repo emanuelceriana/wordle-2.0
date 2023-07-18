@@ -7,6 +7,7 @@ import { SettingsMenu } from "./components/Modals/SettingsMenu.tsx";
 import { Navbar } from "./components/Navbar/Navbar.tsx";
 import { AppContext, IAppContext } from "./context/AppContext";
 import { EndGameMenu } from "./components/Modals/EndGameMenu.tsx";
+import { Background } from "./components/Background.tsx";
 
 function App() {
   const { isGridReady } = useContext<IAppContext>(AppContext);
@@ -19,6 +20,7 @@ function App() {
       <HelpMenu />
       <SettingsMenu />
       <EndGameMenu />
+      <Background />
     </>
   );
 }

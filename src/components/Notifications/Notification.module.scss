@@ -2,6 +2,7 @@
   position: absolute;
   top: 10%;
   left: 42%;
+  z-index: 10;
 
   .message {
     background-color: rgba(223, 211, 211, 0.904);
@@ -38,5 +39,12 @@
   100% {
     transform: translateY(30%);
     opacity: 0;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .notification {
+    top: 0;
+    left: 20%;
   }
 }

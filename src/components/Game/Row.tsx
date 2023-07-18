@@ -8,68 +8,72 @@ import { isCorrectWord } from "../../utils";
 
 interface RowProps {
   idx: number;
+  rowWord: string[];
+  setRowsWord: (x: string[]) => void;
 }
 
 const defaultFocusedInputIdx = 0;
 
-export const Row = forwardRef<HTMLDivElement, RowProps>(({ idx }, rowRef) => {
-  const {
-    setActiveRowIdx,
-    randomWord,
-    wordLength,
-    activeRowIdx,
-    setIsWinner,
-    setIsEndGame,
-  } = useContext<IAppContext>(AppContext);
+export const Row = forwardRef<HTMLDivElement, RowProps>(
+  ({ idx, rowWord, setRowsWord }, rowRef) => {
+    const {
+      setActiveRowIdx,
+      randomWord,
+      wordLength,
+      activeRowIdx,
+      setIsWinner,
+      setIsEndGame,
+    } = useContext<IAppContext>(AppContext);
 
-  const [focusedInputIdx, setFocusedInputIdx] = useState(
-    defaultFocusedInputIdx
-  );
-  const [inputValues, setInputValues] = useState<string[]>([]);
-  const isRowActive = useMemo(() => idx === activeRowIdx, [activeRowIdx]);
+    const [focusedInputIdx, setFocusedInputIdx] = useState(
+      defaultFocusedInputIdx
+    );
 
-  const { objectList: rowInputs } = useCreateObjectList({
-    length: wordLength,
-  });
+    const isRowActive = useMemo(() => idx === activeRowIdx, [activeRowIdx]);
 
-  const { handleKeyUp, wordInputValidation } = useKeyUp({
-    isRowActive,
-    setFocusedInputIdx,
-    setActiveRowIdx,
-    activeRowIdx,
-    inputValues,
-    setInputValues,
-    focusedInputIdx,
-    wordLength,
-    randomWord,
-  });
+    const { objectList: rowInputs } = useCreateObjectList({
+      length: wordLength,
+    });
 
-  useEffect(() => {
-    if (isCorrectWord(wordInputValidation)) {
-      setIsWinner(true);
-      setIsEndGame(true);
-    }
-  }, [wordInputValidation]);
+    const { handleKeyUp, wordInputValidation } = useKeyUp({
+      isRowActive,
+      setFocusedInputIdx,
+      setActiveRowIdx,
+      activeRowIdx,
+      rowWord,
+      setRowsWord,
+      focusedInputIdx,
+      wordLength,
+      randomWord,
+    });
 
-  return (
-    <div
-      ref={rowRef}
-      className={styles.row}
-      tabIndex={-1}
-      onKeyUp={handleKeyUp}
-    >
-      {wordLength &&
-        rowInputs.map(({ id }, idx) => (
-          <LetterBlock
-            key={id}
-            idx={idx}
-            isFocused={focusedInputIdx === idx && isRowActive}
-            value={inputValues[idx]}
-            focusable={isRowActive}
-            setFocusedInputIdx={setFocusedInputIdx}
-            inputValidation={wordInputValidation[idx]}
-          />
-        ))}
-    </div>
-  );
-});
+    useEffect(() => {
+      if (isCorrectWord(wordInputValidation)) {
+        setIsWinner(true);
+        setIsEndGame(true);
+      }
+    }, [wordInputValidation]);
+
+    return (
+      <div
+        ref={rowRef}
+        className={styles.row}
+        tabIndex={-1}
+        onKeyUp={handleKeyUp}
+      >
+        {wordLength &&
+          rowInputs.map(({ id }, idx) => (
+            <LetterBlock
+              key={id}
+              idx={idx}
+              isFocused={focusedInputIdx === idx && isRowActive}
+              value={rowWord?.[idx]}
+              focusable={isRowActive}
+              setFocusedInputIdx={setFocusedInputIdx}
+              inputValidation={wordInputValidation[idx]}
+            />
+          ))}
+      </div>
+    );
+  }
+);

@@ -1,6 +1,6 @@
-export const getAmountOfLetters = (inputValues: string[]) => {
+export const getAmountOfLetters = (rowWord: string[]) => {
   let amountOfLetters = 0;
-  inputValues.forEach((letter: string) => letter !== "" && amountOfLetters++);
+  rowWord.forEach((letter: string) => letter !== "" && amountOfLetters++);
   return amountOfLetters;
 };
 
@@ -12,11 +12,11 @@ export interface ValidationArray {
 
 export const validateWord = (
   randomWord: string,
-  inputValues: string[]
+  rowWord: string[]
 ): ValidationArray[] => {
   const validationArray: ValidationArray[] = [];
 
-  inputValues.forEach((letter: string, idx: number) => {
+  rowWord.forEach((letter: string, idx: number) => {
     const validationLetter = { value: -1, ocurrences: 0, letter: "" };
 
     if (randomWord.indexOf(letter) >= 0) {

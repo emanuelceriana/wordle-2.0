@@ -1,24 +1,33 @@
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { IAppContext, AppContext } from "../../context/AppContext";
 import {
   faArrowTurnDown,
   faDeleteLeft,
+  faCaretDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import cn from "classnames";
-import { keyboardButtons } from "./constants";
+import { keyboardButtons, keyboardButtonsMobile } from "./constants";
 import { useCreateObjectList } from "../hooks/useCreateObjectList";
 import styles from "./Keyboard.module.scss";
+import { isMobile } from "react-device-detect";
 
 interface KeyboardProps {
   rowRefs: React.MutableRefObject<HTMLDivElement[]>;
+  keyboardPreview: string[];
 }
 
-export const Keyboard = ({ rowRefs }: KeyboardProps) => {
+export const Keyboard = ({ rowRefs, keyboardPreview }: KeyboardProps) => {
+  const [isHiddenKeyboard, setIsHiddenKeyboard] = useState(false);
   const { globalWordValidation, activeRowIdx } =
     useContext<IAppContext>(AppContext);
+
+  const keyboard = useMemo(() => {
+    return isMobile ? keyboardButtonsMobile : keyboardButtons;
+  }, [isMobile]);
+
   const { objectList: keyboardButtonsIds } = useCreateObjectList({
-    length: keyboardButtons.length,
+    length: keyboard.length,
   });
 
   const handleClick = useCallback(
@@ -30,37 +39,57 @@ export const Keyboard = ({ rowRefs }: KeyboardProps) => {
 
       rowRefs.current[activeRowIdx].dispatchEvent(event);
     },
-    [rowRefs]
+    [rowRefs, activeRowIdx]
   );
 
   return (
-    <div className={styles.keyboard}>
+    <div
+      className={cn(styles.keyboard, {
+        [styles.isHiddenKeyboard]: isHiddenKeyboard,
+      })}
+    >
+      {isMobile && (
+        <>
+          <div
+            className={styles.mobileVisibilityControl}
+            onClick={() => setIsHiddenKeyboard(!isHiddenKeyboard)}
+          >
+            <FontAwesomeIcon icon={faCaretDown} />
+          </div>
+          <div className={styles.keyboardPreview}>
+            {keyboardPreview?.join("")}
+          </div>
+        </>
+      )}
       {keyboardButtonsIds.map(({ id }, idx) => (
         <div
           key={id}
+          id={keyboard[idx]}
           className={cn(
             styles.keyboardButton,
+            { [styles.backspace]: keyboard[idx] === "backspace" },
+            { [styles.enter]: keyboard[idx] === "enter" },
             {
               [styles["keyboardButton__green"]]:
-                globalWordValidation[keyboardButtons[idx]] === 1,
+                globalWordValidation[keyboard[idx]] === 1,
             },
             {
               [styles["keyboardButton__yellow"]]:
-                globalWordValidation[keyboardButtons[idx]] === 0,
+                globalWordValidation[keyboard[idx]] === 0,
             },
             {
               [styles["keyboardButton__black"]]:
-                globalWordValidation[keyboardButtons[idx]] === -1,
+                globalWordValidation[keyboard[idx]] === -1,
             }
           )}
-          onClick={() => handleClick(keyboardButtons[idx])}
+          onClick={() => handleClick(keyboard[idx])}
         >
-          {keyboardButtons[idx] === "backspace" ? (
+          {keyboard[idx] === "backspace" ? (
             <FontAwesomeIcon icon={faDeleteLeft} />
-          ) : keyboardButtons[idx] === "enter" ? (
+          ) : keyboard[idx] === "enter" ? (
             <FontAwesomeIcon icon={faArrowTurnDown} />
           ) : (
-            keyboardButtons[idx]
+            keyboard[idx]
           )}
         </div>
       ))}

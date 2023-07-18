@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState, useCallback } from "react";
 import { IAppContext, AppContext } from "../../context/AppContext";
 import styles from "./Grid.module.scss";
 import { Keyboard } from "./Keyboard";
@@ -9,12 +9,22 @@ import { Hints } from "./Hints";
 
 export const Grid = ({}) => {
   const rowRefs = useRef<HTMLDivElement[]>([]);
+  const [rowsWord, setRowsWord] = useState<string[][]>([]);
 
   const { activeRowIdx, triesCount } = useContext<IAppContext>(AppContext);
 
   const { objectList: gridRows } = useCreateObjectList({ length: triesCount });
 
   useClickOutside({ rowRefs, activeRowIdx });
+
+  const handleRowWord = useCallback(
+    (rW: string[], idx: number) => {
+      const newRowsWord = [...rowsWord];
+      newRowsWord[idx] = rW;
+      setRowsWord(newRowsWord);
+    },
+    [rowsWord]
+  );
 
   return (
     <>
@@ -26,11 +36,18 @@ export const Grid = ({}) => {
                 <Row
                   key={id}
                   idx={idx}
+                  rowWord={rowsWord[idx]}
+                  setRowsWord={(rowWord: string[]) =>
+                    handleRowWord(rowWord, idx)
+                  }
                   ref={(ref: HTMLDivElement) => (rowRefs.current[idx] = ref)}
                 />
               ))}
           </div>
-          <Keyboard rowRefs={rowRefs} />
+          <Keyboard
+            rowRefs={rowRefs}
+            keyboardPreview={rowsWord[activeRowIdx]}
+          />
         </div>
         <div className={styles.right}>
           <Hints />

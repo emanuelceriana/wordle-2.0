@@ -28,17 +28,8 @@ body {
   place-items: start;
   min-width: 320px;
   min-height: 100vh;
-
-  background: linear-gradient(
-    -45deg,
-    #848fab,
-    #4d5b74,
-    #37455e,
-    #303533,
-    #171c1a
-  );
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  background: #4e54c8;
+  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
 }
 
 h1 {
@@ -80,14 +71,8 @@ button {
   }
 }
 
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+@media only screen and (max-width: 900px) {
+  body {
+    min-height: auto;
   }
 }

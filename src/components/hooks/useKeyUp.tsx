@@ -14,8 +14,8 @@ interface KeyUpProps {
   setFocusedInputIdx: (idx: number) => void;
   setActiveRowIdx: (idx: number) => void;
   activeRowIdx: number;
-  inputValues: string[];
-  setInputValues: (inputValues: string[]) => void;
+  rowWord: string[];
+  setRowsWord: (x: string[]) => void;
   focusedInputIdx: number;
   wordLength: number;
   randomWord: string;
@@ -32,8 +32,8 @@ const useKeyUp = ({
   setFocusedInputIdx,
   setActiveRowIdx,
   activeRowIdx,
-  inputValues,
-  setInputValues,
+  rowWord,
+  setRowsWord,
   focusedInputIdx,
   wordLength,
   randomWord,
@@ -50,22 +50,22 @@ const useKeyUp = ({
     setNotification,
   } = useContext<IAppContext>(AppContext);
 
-  const validate = (randomWord: string, inputValues: string[]) => {
-    handleGlobalWordValidation(validateWord(randomWord, inputValues));
-    setWordInputValidation(validateWord(randomWord, inputValues));
+  const validate = (randomWord: string, rowWord: string[]) => {
+    handleGlobalWordValidation(validateWord(randomWord, rowWord));
+    setWordInputValidation(validateWord(randomWord, rowWord));
   };
 
   const checkHardMode = useCallback(async () => {
     let next = true;
     if (userSettings.isHardModeActive) {
-      const isValidRealWord = await validateRealWord(inputValues.join(""));
+      const isValidRealWord = await validateRealWord(rowWord.join(""));
       if (!isValidRealWord) {
         setNotification(hardModeMessageError);
       }
       next = isValidRealWord;
     }
     return next;
-  }, [inputValues, userSettings, validateRealWord, setNotification]);
+  }, [rowWord, userSettings, validateRealWord, setNotification]);
 
   const handleKeyUp: KeyboardEventHandler<HTMLElement> = useCallback(
     async (e: KeyboardEvent) => {
@@ -73,34 +73,30 @@ const useKeyUp = ({
         const keyPressed = e.key.toLowerCase();
         if (
           keyPressed === "enter" &&
-          getAmountOfLetters(inputValues) === wordLength
+          getAmountOfLetters(rowWord) === wordLength
         ) {
           if (await checkHardMode()) {
-            validate(randomWord, inputValues);
+            validate(randomWord, rowWord);
             setFocusedInputIdx(0);
             setActiveRowIdx(activeRowIdx + 1);
             playSound(playlist.Try);
           }
         } else if (keyPressed === "backspace") {
-          if (
-            inputValues[focusedInputIdx] &&
-            inputValues[focusedInputIdx] !== ""
-          ) {
-            const updatedValues = [...inputValues];
+          if (rowWord[focusedInputIdx] && rowWord[focusedInputIdx] !== "") {
+            const updatedValues = [...rowWord];
             updatedValues[focusedInputIdx] = "";
-            setInputValues(updatedValues);
+            setRowsWord(updatedValues);
           } else if (
-            (!inputValues[focusedInputIdx] ||
-              inputValues[focusedInputIdx] === "") &&
+            (!rowWord[focusedInputIdx] || rowWord[focusedInputIdx] === "") &&
             focusedInputIdx > 0
           ) {
             setFocusedInputIdx(focusedInputIdx - 1);
           }
           playSound(playlist.Keyboard);
         } else if (/^[a-z]$/.test(keyPressed)) {
-          const updatedValues = [...inputValues];
+          const updatedValues = rowWord ? [...rowWord] : [];
           updatedValues[focusedInputIdx] = keyPressed;
-          setInputValues(updatedValues);
+          setRowsWord(updatedValues);
           playSound(playlist.Keyboard);
           if (focusedInputIdx < wordLength - 1) {
             setFocusedInputIdx(focusedInputIdx + 1);
@@ -110,7 +106,7 @@ const useKeyUp = ({
     },
     [
       isRowActive,
-      inputValues,
+      rowWord,
       focusedInputIdx,
       userSettings,
       setActiveRowIdx,

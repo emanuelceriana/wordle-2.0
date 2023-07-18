@@ -15,7 +15,7 @@
 
   &__wTitle {
     display: inline-flex;
-    rotate: 180deg;
+    transform: rotate(180deg);
   }
 
   &__actions {
@@ -43,33 +43,13 @@
   }
 }
 
-// .navbar .title {
-//   position: absolute;
-// }
-
-// .navbar .wTitle {
-//   display: inline-flex;
-//   rotate: 180deg;
-// }
-
-// .navbar span:nth-child(1) {
-//   margin: -0.155em;
-// }
-
-// .navbar .actions {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: end;
-//   align-items: center;
-//   width: 600px;
-//   font-size: 0.7em;
-// }
-
-// .navbar .actions div {
-//   margin: 0.5em;
-// }
-
-// .navbar .actions div:hover {
-//   color: gold;
-//   cursor: pointer;
-// }
+@media only screen and (max-width: 900px) {
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    &__wTitle {
+      transform: rotate(160deg) translate(0.1em, 0.25em);
+    }
+  }
+}

@@ -33,10 +33,11 @@ export const fetchHints = (word: string) => {
                 shortDefinitionsArray.push(definitions[0]);
             });
 
-            hints.push({
-              shortDefinitions: shortDefinitionsArray[0],
-              lexicalCategory: hint.lexicalCategory.text,
-            });
+            shortDefinitionsArray[0]?.length &&
+              hints.push({
+                shortDefinitions: shortDefinitionsArray[0],
+                lexicalCategory: hint.lexicalCategory.text,
+              });
           });
           shuffleArray(hints);
         }

@@ -27,3 +27,21 @@
     width: 100%;
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .rangeSlider {
+    flex-direction: column;
+
+    &__label {
+      margin-bottom: 0.5em;
+    }
+
+    &__input {
+      width: 100%;
+    }
+
+    &__counter {
+      top: 2.2em;
+    }
+  }
+}

@@ -55,3 +55,24 @@
     cursor: not-allowed;
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .hintBox {
+    width: 90%;
+    margin-top: 1vh;
+    margin-left: 0;
+    height: auto;
+
+    .hidingHint {
+      margin: 0.8em 0 0 0;
+
+      button {
+        margin: 0;
+      }
+
+      div {
+        padding: 0.5em 0.5em;
+      }
+    }
+  }
+}

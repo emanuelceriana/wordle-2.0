@@ -32,3 +32,9 @@
     }
   }
 }
+
+@media only screen and (max-width: 900px) {
+  .panel {
+    flex-direction: column-reverse;
+  }
+}
