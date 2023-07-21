@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WordLengthSelector /> should render without errors 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="wordLengthSelector"
+    >
+      <span>
+        Word Length:
+      </span>
+      <div
+        class="wordLengthSelector__buttons"
+      >
+        <button
+          class="wordLengthSelector__button"
+        >
+          4
+        </button>
+        <button
+          class="wordLengthSelector__button wordLengthSelector__selected"
+        >
+          5
+        </button>
+        <button
+          class="wordLengthSelector__button"
+        >
+          6
+        </button>
+        <button
+          class="wordLengthSelector__button"
+        >
+          7
+        </button>
+        <button
+          class="wordLengthSelector__button"
+        >
+          8
+        </button>
+        <button
+          class="wordLengthSelector__button"
+        >
+          9
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RangeSlider /> should render without errors 1`] = `
+<DocumentFragment>
+  <div
+    class="rangeSlider"
+  >
+    <span
+      class="rangeSlider__label"
+    >
+      Try Count:
+    </span>
+    <div
+      class="rangeSlider__input"
+    >
+      <span>
+        1
+      </span>
+      <input
+        max="50"
+        min="1"
+        step="1"
+        type="range"
+        value="6"
+      />
+      <span>
+        50
+      </span>
+      <div
+        class="rangeSlider__counter"
+      >
+        6
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

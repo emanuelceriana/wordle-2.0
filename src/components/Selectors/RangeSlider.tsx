@@ -14,8 +14,11 @@ export const RangeSlider = ({
   const [triesCount, setTriesCount] = useState<number>(defaultValue);
 
   const handleChangeRangeSlider = (e: ChangeEvent<HTMLInputElement>) => {
-    setTriesCount(parseInt(e.target.value));
-    onChangeRequest(parseInt(e.target.value));
+    const value = parseInt(e.target.value);
+    if (value >= 1 && value <= 50) {
+      setTriesCount(parseInt(e.target.value));
+      onChangeRequest(parseInt(e.target.value));
+    }
   };
 
   return (

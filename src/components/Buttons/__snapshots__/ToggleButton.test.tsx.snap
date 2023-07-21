@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ToggleButton /> should render without errors 1`] = `
+<DocumentFragment>
+  <div
+    class="toggleButton"
+  >
+    <label
+      class="toggleButton__switch"
+    >
+      <input
+        checked=""
+        data-testid="hardModeToggleButton"
+        type="checkbox"
+      />
+      <span
+        class="slider round"
+      />
+    </label>
+  </div>
+</DocumentFragment>
+`;

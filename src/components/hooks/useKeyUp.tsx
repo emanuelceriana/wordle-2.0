@@ -27,7 +27,7 @@ const hardModeMessageError = (
   </>
 );
 
-const useKeyUp = ({
+export const useKeyUp = ({
   isRowActive,
   setFocusedInputIdx,
   setActiveRowIdx,
@@ -86,10 +86,7 @@ const useKeyUp = ({
             const updatedValues = [...rowWord];
             updatedValues[focusedInputIdx] = "";
             setRowsWord(updatedValues);
-          } else if (
-            (!rowWord[focusedInputIdx] || rowWord[focusedInputIdx] === "") &&
-            focusedInputIdx > 0
-          ) {
+          } else if (focusedInputIdx > 0) {
             setFocusedInputIdx(focusedInputIdx - 1);
           }
           playSound(playlist.Keyboard);

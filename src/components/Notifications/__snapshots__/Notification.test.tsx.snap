@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Notification /> should render without errors 1`] = `
+<DocumentFragment>
+  <div
+    class="notification"
+  >
+    <div
+      class="message animation"
+      data-testid="notificationMessage"
+    >
+      <p>
+        test
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;

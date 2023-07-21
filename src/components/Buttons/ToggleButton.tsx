@@ -16,6 +16,7 @@ export const ToggleButton = ({
     <div className={styles.toggleButton}>
       <label className={styles["toggleButton__switch"]}>
         <input
+          data-testid="hardModeToggleButton"
           type="checkbox"
           disabled={disabled}
           checked={value}

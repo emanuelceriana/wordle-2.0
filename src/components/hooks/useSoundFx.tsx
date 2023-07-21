@@ -20,7 +20,7 @@ type Playlist = {
   [K in PlaylistValidKeys]: HTMLAudioElement;
 };
 
-const playlist: Playlist = {
+export const playlist: Playlist = {
   [PlaylistValidKeys.Win]: new Audio(WinSound),
   [PlaylistValidKeys.Lose]: new Audio(LoseSound),
   [PlaylistValidKeys.Keyboard]: new Audio(KeyboardSound),

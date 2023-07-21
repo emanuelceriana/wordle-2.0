@@ -14,6 +14,9 @@ export const useValidateRealWord = ({ queryClient }: ValidateRealWord) => {
         isValidWord = await queryClient.fetchQuery(["randomWord", word], () =>
           validateWord(word)
         );
+        if (typeof isValidWord !== "boolean") {
+          throw new Error("Invalid response");
+        }
       } catch {
         return false;
       }

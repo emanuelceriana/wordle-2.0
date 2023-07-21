@@ -29,8 +29,10 @@ export const useGenerateRandomWord = ({
       const randomWord = await queryClient.fetchQuery("randomWord", () =>
         fetchRandomWord(wordLength)
       );
-      if (randomWord && randomWord != "") {
+      if (randomWord && typeof randomWord === "string" && randomWord != "") {
         return randomWord;
+      } else {
+        throw new Error("Invalid Random Word");
       }
     } catch {
       return possibleWords[randomIndex];

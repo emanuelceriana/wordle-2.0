@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Background /> should render without errors 1`] = `
+<DocumentFragment>
+  <div>
+    <ul
+      class="circles"
+    >
+      <li />
+      <li />
+      <li />
+      <li />
+      <li />
+      <li />
+      <li />
+      <li />
+      <li />
+      <li />
+    </ul>
+  </div>
+</DocumentFragment>
+`;

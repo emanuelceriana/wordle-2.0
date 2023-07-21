@@ -34,11 +34,15 @@ export const Navbar = () => {
         <span>ordle 2.0</span>
       </div>
       <div className={styles["navbar__actions"]}>
-        <div onClick={() => setIsHelpMenuOpen(true)}>
+        <div
+          data-testid="openHelpMenuButton"
+          onClick={() => setIsHelpMenuOpen(true)}
+        >
           <FontAwesomeIcon icon={faCircleQuestion} />
         </div>
         <div
           className={styles["settingsMenu__fxControl"]}
+          data-testid="soundFxControlButton"
           onClick={handleFxControlClick}
         >
           {userSettings.isSoundFxActive ? (
@@ -47,7 +51,10 @@ export const Navbar = () => {
             <FontAwesomeIcon icon={faVolumeXmark} />
           )}
         </div>
-        <div onClick={() => setIsSettingsMenuOpen(true)}>
+        <div
+          data-testid="openSettingsMenuButton"
+          onClick={() => setIsSettingsMenuOpen(true)}
+        >
           <FontAwesomeIcon icon={faGear} />
         </div>
       </div>
