@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LetterBlock /> should render without errors 1`] = `
+<DocumentFragment>
+  <div
+    class="letterBlock letterBlock__green"
+    data-testid="letterBlock"
+    tabindex="-1"
+  >
+    <span
+      class="ocurrences"
+      data-testid="letterBlockOcurrences"
+    >
+      x0
+    </span>
+    a
+  </div>
+</DocumentFragment>
+`;

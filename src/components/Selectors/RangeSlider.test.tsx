@@ -1,6 +1,5 @@
 import { render, fireEvent } from "@testing-library/react";
 import { RangeSlider } from "./RangeSlider";
-import userEvent from "@testing-library/user-event";
 
 describe("<RangeSlider />", () => {
   const defaultValue = 6;

@@ -50,13 +50,14 @@ export const LetterBlock = ({
           [styles["letterBlock__black"]]: inputValidation?.value === -1,
         }
       )}
+      data-testid="letterBlock"
       tabIndex={-1}
       ref={blockRef}
       onClick={handleClick}
       onFocus={handleFocus}
     >
       {inputValidation && (
-        <span className={styles.ocurrences}>
+        <span data-testid="letterBlockOcurrences" className={styles.ocurrences}>
           x{inputValidation?.ocurrences}
         </span>
       )}
