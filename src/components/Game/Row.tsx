@@ -2,7 +2,7 @@ import { forwardRef, useContext, useMemo, useState, useEffect } from "react";
 import { AppContext, IAppContext } from "../../context/AppContext";
 import { LetterBlock } from "./LetterBlock";
 import { useCreateObjectList } from "../hooks/useCreateObjectList";
-import useKeyUp from "../hooks/useKeyUp";
+import { useKeyUp } from "../hooks/useKeyUp";
 import styles from "./Row.module.scss";
 import { isCorrectWord } from "../../utils";
 

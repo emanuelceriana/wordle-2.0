@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Hints /> should render without errors 1`] = `
+<DocumentFragment>
+  <div
+    class="hintBox"
+  >
+    <div
+      class="hidingHint"
+    >
+      <button
+        data-testid="hintButton"
+      >
+        Hint
+      </button>
+      <div>
+        <b>
+          Note:
+        </b>
+         
+        <i>
+          Some hints make the game 99% simpler so think twice before clicking 🤔
+        </i>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

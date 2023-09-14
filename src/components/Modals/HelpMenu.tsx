@@ -7,7 +7,7 @@ interface SimpleExplanationProps {
   children: ReactNode;
 }
 
-const SimpleExplanation = ({ children }: SimpleExplanationProps) => {
+export const SimpleExplanation = ({ children }: SimpleExplanationProps) => {
   return <div className={styles["helpMenu__explanation"]}>{children}</div>;
 };
 
@@ -19,7 +19,7 @@ interface LetterExplanationProps {
   ocurrences?: number;
 }
 
-const LetterExplanation = ({
+export const LetterExplanation = ({
   children,
   color,
   letter,
@@ -54,7 +54,7 @@ export const HelpMenu = () => {
       showCloseButton={true}
       title="Help"
     >
-      <div className={styles.helpMenu}>
+      <div className={styles.helpMenu} data-testid="helpMenu">
         <SimpleExplanation>
           To start playing you need just to write a word with the length of the
           squares availables, you can use the virtual keyboard if you want.

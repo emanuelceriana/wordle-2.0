@@ -56,6 +56,7 @@ export const Hints = () => {
         ) : (
           <>
             <div
+              data-testid="previousHint"
               className={cn(styles.left, {
                 [styles.hidden]: !showLeftButton,
               })}
@@ -63,7 +64,7 @@ export const Hints = () => {
             >
               <FontAwesomeIcon icon={faCaretLeft} />
             </div>
-            <div className={styles.hintText}>
+            <div data-testid="hintText" className={styles.hintText}>
               <div className={styles.lexicalCategory}>
                 <b>{hints?.[indexHint].lexicalCategory}:</b>
               </div>
@@ -73,6 +74,7 @@ export const Hints = () => {
             </div>
 
             <div
+              data-testid="nextHint"
               className={cn(styles.right, {
                 [styles.hidden]: !showRigthButton,
               })}
@@ -88,7 +90,9 @@ export const Hints = () => {
             <div>Searching hints... 🕵</div>
           ) : (
             <>
-              <button onClick={handleHints}>Hint</button>
+              <button data-testid="hintButton" onClick={handleHints}>
+                Hint
+              </button>
               <div>
                 <b>Note:</b>{" "}
                 <i>

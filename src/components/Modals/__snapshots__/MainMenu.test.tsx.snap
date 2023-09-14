@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MainMenu /> should render without errors 1`] = `
+<DocumentFragment>
+  <div
+    class="modalBg"
+  />
+  <div
+    class="modalBg__modal"
+  >
+    <div
+      class="modalBg__modal-title"
+    />
+    <div
+      class="modalBg__modal-body"
+    >
+      <div
+        class="mainMenu"
+        data-testid="mainMenu"
+      >
+        <h3>
+          Welcome to Wordle 2.0
+        </h3>
+        <p>
+          The well known game but with an awesome feature
+You can select the length of the word to guess and the amount of tries!
+        </p>
+        <div>
+          <div
+            class="wordLengthSelector"
+          >
+            <span>
+              Word Length:
+            </span>
+            <div
+              class="wordLengthSelector__buttons"
+            >
+              <button
+                class="wordLengthSelector__button"
+              >
+                4
+              </button>
+              <button
+                class="wordLengthSelector__button wordLengthSelector__selected"
+              >
+                5
+              </button>
+              <button
+                class="wordLengthSelector__button"
+              >
+                6
+              </button>
+              <button
+                class="wordLengthSelector__button"
+              >
+                7
+              </button>
+              <button
+                class="wordLengthSelector__button"
+              >
+                8
+              </button>
+              <button
+                class="wordLengthSelector__button"
+              >
+                9
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="rangeSlider"
+        >
+          <span
+            class="rangeSlider__label"
+          >
+            Try Count:
+          </span>
+          <div
+            class="rangeSlider__input"
+          >
+            <span>
+              1
+            </span>
+            <input
+              max="50"
+              min="1"
+              step="1"
+              type="range"
+              value="6"
+            />
+            <span>
+              50
+            </span>
+            <div
+              class="rangeSlider__counter"
+            >
+              6
+            </div>
+          </div>
+        </div>
+        <div>
+          <button>
+            Start Game
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

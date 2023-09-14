@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MainMenu /> should render without errors 1`] = `
+<DocumentFragment>
+  <div
+    class="modalBg"
+  />
+  <div
+    class="modalBg__modal"
+  >
+    <div
+      class="modalBg__modal-title"
+    >
+      Modal
+    </div>
+    <button
+      class="modalBg__modal-cButton"
+    >
+      X
+    </button>
+    <div
+      class="modalBg__modal-body"
+    >
+      test
+    </div>
+  </div>
+</DocumentFragment>
+`;

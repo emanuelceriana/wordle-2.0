@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HelpMenu /> should render without errors 1`] = `
+<DocumentFragment>
+  <div
+    class="modalBg"
+  />
+  <div
+    class="modalBg__modal"
+  >
+    <div
+      class="modalBg__modal-title"
+    >
+      Help
+    </div>
+    <button
+      class="modalBg__modal-cButton"
+    >
+      X
+    </button>
+    <div
+      class="modalBg__modal-body"
+    >
+      <div
+        class="helpMenu"
+        data-testid="helpMenu"
+      >
+        <div
+          class="helpMenu__explanation"
+        >
+          To start playing you need just to write a word with the length of the squares availables, you can use the virtual keyboard if you want.
+        </div>
+        <div
+          class="helpMenu__explanation"
+        >
+          <b>
+            Easy Mode:
+          </b>
+           For each try you don't need to write word. A chain of characters is valid. It's easy and boring. 🥱 
+          <i>
+            ASDASD
+          </i>
+           should work.
+        </div>
+        <div
+          class="helpMenu__explanation"
+        >
+          <b>
+            Hard Mode:
+          </b>
+           For each try you need to write a real word. It's harder and exciting. 🔥 Did you know that 
+          <i>
+            QWERTY
+          </i>
+           is accepted by Merriam-Webster dictionary?
+        </div>
+        <div
+          class="helpMenu__caseBlock"
+        >
+          <div
+            class="helpMenu__caseBlock-green"
+          >
+            W
+          </div>
+          <div
+            class="helpMenu__caseBlock-explanation"
+          >
+            If green it means that the word has this letter and it is in the correct position.
+          </div>
+        </div>
+        <div
+          class="helpMenu__caseBlock"
+        >
+          <div
+            class="helpMenu__caseBlock-yellow"
+          >
+            O
+          </div>
+          <div
+            class="helpMenu__caseBlock-explanation"
+          >
+            If yellow it means that the word has this letter but it is not in the correct position.
+          </div>
+        </div>
+        <div
+          class="helpMenu__caseBlock"
+        >
+          <div
+            class="helpMenu__caseBlock-black"
+          >
+            R
+          </div>
+          <div
+            class="helpMenu__caseBlock-explanation"
+          >
+            If black it means that the word has not this letter.
+          </div>
+        </div>
+        <div
+          class="helpMenu__caseBlock"
+        >
+          <div>
+            <span>
+              x2
+            </span>
+            D
+          </div>
+          <div
+            class="helpMenu__caseBlock-explanation"
+          >
+            That x(X) means that the letter is present in the word X times.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

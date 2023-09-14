@@ -51,6 +51,7 @@ export const Keyboard = ({ rowRefs, keyboardPreview }: KeyboardProps) => {
       {isMobile && (
         <>
           <div
+            data-testid="hideMobileKeyboard"
             className={styles.mobileVisibilityControl}
             onClick={() => setIsHiddenKeyboard(!isHiddenKeyboard)}
           >
@@ -65,6 +66,7 @@ export const Keyboard = ({ rowRefs, keyboardPreview }: KeyboardProps) => {
         <div
           key={id}
           id={keyboard[idx]}
+          data-testid={keyboard[idx]}
           className={cn(
             styles.keyboardButton,
             { [styles.backspace]: keyboard[idx] === "backspace" },

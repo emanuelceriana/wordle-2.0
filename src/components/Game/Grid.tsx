@@ -28,20 +28,23 @@ export const Grid = ({}) => {
 
   return (
     <>
-      <div className={styles.panel}>
+      <div className={styles.panel} data-testid="grid">
         <div className={styles.left}>
           <div className={styles.grid}>
             {triesCount &&
               gridRows.map(({ id }, idx) => (
-                <Row
-                  key={id}
-                  idx={idx}
-                  rowWord={rowsWord[idx]}
-                  setRowsWord={(rowWord: string[]) =>
-                    handleRowWord(rowWord, idx)
-                  }
-                  ref={(ref: HTMLDivElement) => (rowRefs.current[idx] = ref)}
-                />
+                <div key={id} data-testid="gridRow">
+                  <Row
+                    key={id}
+                    data-testid="gridRow"
+                    idx={idx}
+                    rowWord={rowsWord[idx]}
+                    setRowsWord={(rowWord: string[]) =>
+                      handleRowWord(rowWord, idx)
+                    }
+                    ref={(ref: HTMLDivElement) => (rowRefs.current[idx] = ref)}
+                  />
+                </div>
               ))}
           </div>
           <Keyboard

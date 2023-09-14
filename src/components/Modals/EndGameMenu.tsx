@@ -8,23 +8,25 @@ export const EndGameMenu = () => {
 
   return (
     <Modal isOpen={isEndGame} showCloseButton={false}>
-      {isWinner ? (
-        <>
-          <h3>You Win! 🥳 </h3>
-          <p>{`You did it in just ${activeRowIdx} tries`}</p>
-        </>
-      ) : (
-        <>
-          <h3>You Lose! 😰</h3>
-          <p>
-            The word was: <strong>{randomWord.toUpperCase()}</strong>
-          </p>
-        </>
-      )}
-      <div>
-        <button onClick={restartGame}>
-          {isWinner ? "Play Again?" : "Another Try?"}
-        </button>
+      <div data-testid="endGameMenu">
+        {isWinner ? (
+          <>
+            <h3>You Win! 🥳 </h3>
+            <p>{`You did it in just ${activeRowIdx} tries`}</p>
+          </>
+        ) : (
+          <>
+            <h3>You Lose! 😰</h3>
+            <p>
+              The word was: <strong>{randomWord.toUpperCase()}</strong>
+            </p>
+          </>
+        )}
+        <div>
+          <button onClick={restartGame}>
+            {isWinner ? "Play Again?" : "Another Try?"}
+          </button>
+        </div>
       </div>
     </Modal>
   );

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EndGameMenu /> should render without errors 1`] = `
+<DocumentFragment>
+  <div
+    class="modalBg"
+  />
+  <div
+    class="modalBg__modal"
+  >
+    <div
+      class="modalBg__modal-title"
+    />
+    <div
+      class="modalBg__modal-body"
+    >
+      <div
+        data-testid="endGameMenu"
+      >
+        <h3>
+          You Win! 🥳 
+        </h3>
+        <p>
+          You did it in just 0 tries
+        </p>
+        <div>
+          <button>
+            Play Again?
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

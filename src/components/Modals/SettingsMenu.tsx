@@ -28,7 +28,7 @@ export const SettingsMenu = () => {
       showCloseButton={true}
       title="Settings"
     >
-      <div className={styles.settingsMenu}>
+      <div className={styles.settingsMenu} data-testid="settingsMenu">
         <div className={styles["settingsMenu__caseBlock"]}>
           <div>Hard Mode:</div>
           <div className={styles.explanation}>

@@ -13,7 +13,7 @@ export const MainMenu = memo(() => {
 
   return (
     <Modal isOpen={isMainMenuOpen} showCloseButton={false}>
-      <div className={styles.mainMenu}>
+      <div className={styles.mainMenu} data-testid="mainMenu">
         <h3>Welcome to Wordle 2.0</h3>
         <p>{mainMenuText}</p>
 

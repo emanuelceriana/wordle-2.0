@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Row /> should render without errors 1`] = `
+<DocumentFragment>
+  <div
+    class="row"
+    tabindex="-1"
+  >
+    <div
+      class="letterBlock focused"
+      data-testid="letterBlock"
+      tabindex="-1"
+    />
+    <div
+      class="letterBlock"
+      data-testid="letterBlock"
+      tabindex="-1"
+    />
+    <div
+      class="letterBlock"
+      data-testid="letterBlock"
+      tabindex="-1"
+    />
+    <div
+      class="letterBlock"
+      data-testid="letterBlock"
+      tabindex="-1"
+    />
+  </div>
+</DocumentFragment>
+`;
