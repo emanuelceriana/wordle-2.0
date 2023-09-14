@@ -1,6 +1,6 @@
 # Wordle 2.0 Game
 
-Welcome to the Improved Wordle Game implemented in JavaScript! This is a word-guessing game that builds upon the classic Wordle concept with some exciting enhancements. Challenge your word-solving skills and enjoy a new level of word-guessing fun.
+Welcome to the Improved Wordle Game implemented in Typescript! This is a word-guessing game that builds upon the classic Wordle concept with some exciting enhancements. Challenge your word-solving skills and enjoy a new level of word-guessing fun.
 
 ## Table of Contents
 
